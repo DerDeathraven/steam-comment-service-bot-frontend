@@ -15,3 +15,16 @@ export async function getBots(): Promise<Array<any>> {
   const json = await resp.json();
   return json.bots;
 }
+
+export async function callCommentFunction(
+  steamAccount: string,
+  amount: number
+) {
+  const resp = await fetch("/api/comments", {
+    method: "POST",
+    body: JSON.stringify({
+      steamAccount,
+      amount,
+    }),
+  });
+}

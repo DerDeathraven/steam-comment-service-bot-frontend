@@ -12,6 +12,7 @@ import { useRoute, useRouter } from "vue-router";
 import BotsOverview from "../components/BotsOverview.vue";
 import { useBotStore } from "../Stores/BotsStorage";
 import CommentField from "../components/general/CommentField.vue";
+import BotsStartup from "../components/BotsStartup.vue";
 const router = useRouter();
 
 onMounted(async () => {
