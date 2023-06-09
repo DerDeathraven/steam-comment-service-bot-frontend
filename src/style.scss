@@ -19,3 +19,19 @@ html{
   color: var(--textBody);
 
 }
+.input{
+
+    background-color: var(--background);
+    @apply rounded-lg p-2 w-1/3;
+    transition: outline-offset 0.3s;
+    &:focus {
+      outline: var(--highlight) 1px solid;
+      outline-offset: -2px;
+    }
+  
+}
+.button{
+    @apply rounded-lg p-2 px-7;
+    color: rgb(249, 249, 249);
+    background-color: var(--highlight);
+}
