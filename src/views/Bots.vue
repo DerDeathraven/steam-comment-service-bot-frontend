@@ -4,7 +4,7 @@
     <div class="flex justify-end">
       <button @click="addBot" class="button">Add Bot</button>
     </div>
-    <div class="flex flex-col gap-4 botRows-wrapper">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 botRows-wrapper">
       <BotRow
         v-for="bot in botStore.bots"
         :key="bot.id"
@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
-import BotRow from "../components/bots/BotRow.vue";
+import BotRow from "../components/bots/BotView.vue";
 import AddBotDiaglog from "../components/botSettings/addBotDiaglog.vue";
 import { useBotStore } from "../Stores/BotsStorage";
 

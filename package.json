@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@phosphor-icons/vue": "^2.1.4",
     "@types/steam-user": "^4.26.4",
     "@types/vue-router": "^2.0.0",
     "pinia": "^2.1.3",
