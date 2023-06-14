@@ -1,26 +1,41 @@
 <template>
-  <AddBotDiaglog :show="true"></AddBotDiaglog>
+  <AddBotDiaglog v-model="showAddBotDiaglog"></AddBotDiaglog>
   <div class="tile-wrapper">
-    <div>
-      <div>add bot</div>
+    <div class="flex justify-end">
+      <button @click="addBot" class="button">Add Bot</button>
     </div>
-    <div class="flex flex-col gap-4">
-      <BotRow v-for="bot in bots" :key="bot.id" :bot="bot"></BotRow>
+    <div class="flex flex-col gap-4 botRows-wrapper">
+      <BotRow
+        v-for="bot in botStore.bots"
+        :key="bot.id"
+        :bot="bot"
+        class="botsRow"
+      ></BotRow>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Ref, onMounted, ref } from "vue";
-import { getBots } from "../services/Controller";
+import { onMounted, ref, watch } from "vue";
 import BotRow from "../components/bots/BotRow.vue";
 import AddBotDiaglog from "../components/botSettings/addBotDiaglog.vue";
+import { useBotStore } from "../Stores/BotsStorage";
 
-const bots: Ref<any[]> = ref([]);
+const botStore = useBotStore();
+const showAddBotDiaglog = ref(false);
 onMounted(async () => {
-  bots.value = await getBots();
-  console.log(bots.value);
+  await botStore.updateBots();
 });
+async function addBot() {
+  showAddBotDiaglog.value = true;
+  await waitForClosing();
+  await botStore.updateBots();
+}
+function waitForClosing() {
+  return new Promise((resolve) => {
+    watch(showAddBotDiaglog, resolve);
+  });
+}
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog">
+  <div class="dialog" v-if="show">
     <div class="inner-dialog">
       <h2>Add a Bot</h2>
       <div>
@@ -23,7 +23,10 @@
             placeholder="Password"
           />
         </div>
-        <MFA v-if="!beforeSteamguard"></MFA>
+        <MFA
+          v-if="!beforeSteamguard"
+          @full-code="enteringSteamGuardCode($event)"
+        ></MFA>
       </div>
       <div class="form-group">
         <button class="w-full button" @click="startAdding">Add</button>
@@ -37,11 +40,8 @@ import { ref } from "vue";
 import { addBot } from "../../services/Controller";
 import MFA from "../inputs/MFA.vue";
 
-let botAdder = undefined;
-type DialogType = {
-  show: boolean;
-};
-defineProps<DialogType>();
+let botAdder: ReturnType<typeof addBot> | undefined = undefined;
+const show = defineModel();
 const beforeSteamguard = ref(true);
 const formState = ref({
   name: "",
@@ -49,12 +49,20 @@ const formState = ref({
 });
 async function startAdding() {
   const { name, password } = formState.value;
+  // console.log(name, password);
   botAdder = addBot(name, password);
   const { value: steamAccount } = await botAdder.next();
 
   if (!steamAccount) return;
+  beforeSteamguard.value = false;
 }
-async function enteringSteamGuardCode() {}
+async function enteringSteamGuardCode(code: string) {
+  const { value: steamAccount } = await botAdder!.next(code);
+
+  if (!steamAccount) return;
+  beforeSteamguard.value = false;
+  show.value = false;
+}
 </script>
 
 <style scoped lang="scss">

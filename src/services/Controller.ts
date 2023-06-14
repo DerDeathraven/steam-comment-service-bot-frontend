@@ -32,18 +32,21 @@ export async function callCommentFunction(
 export async function* addBot(name: string, password: string) {
   const resp = await fetch("/api/bots", {
     method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       name,
       password,
     }),
   });
   const json = await resp.json();
-  const code: number = yield json;
-  const resp2 = await fetch("/api/steamGuard", {
+  const code: string = yield json;
+  const resp2 = await fetch("/api/steamGuardCode", {
     method: "POST",
+    headers: { "Content-Type": "application/json" },
+
     body: JSON.stringify({
       code,
-      bot: json.bot,
+      botIndex: json.bot,
     }),
   });
   const json2 = await resp2.json();

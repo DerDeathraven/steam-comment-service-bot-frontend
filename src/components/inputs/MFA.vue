@@ -3,7 +3,7 @@
     <input
       v-for="(inp, i) in inputArr"
       :id="'inp' + i"
-      type="number"
+      type="text"
       :value="inp"
       class="mfa-input"
       @input="skipToNext(i, $event)"
@@ -25,7 +25,7 @@ const emit = defineEmits(["fullCode", "input"]);
 const inputArr: Ref<string[]> = ref([]);
 function resetInputArr() {
   inputArr.value = [];
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     inputArr.value.push("");
   }
 }
