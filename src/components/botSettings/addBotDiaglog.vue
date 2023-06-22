@@ -1,7 +1,11 @@
 <template>
   <div class="dialog" v-if="show">
     <div class="inner-dialog">
-      <h2>Add a Bot</h2>
+      <div class="flex justify-between items-center">
+        <h2>Add a Bot</h2>
+        <ph-x :size="24" @click="handleClose()" class="cursor-pointer" />
+      </div>
+
       <div>
         Adding a new bot is as easy as enterering your username and password.
         you will then be prompted to enter your steamguard code.
@@ -38,6 +42,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { addBot } from "../../services/Controller";
+import { PhX } from "@phosphor-icons/vue";
 import MFA from "../inputs/MFA.vue";
 
 let botAdder: ReturnType<typeof addBot> | undefined = undefined;
@@ -61,6 +66,9 @@ async function enteringSteamGuardCode(code: string) {
 
   if (!steamAccount) return;
   beforeSteamguard.value = false;
+  show.value = false;
+}
+function handleClose() {
   show.value = false;
 }
 </script>

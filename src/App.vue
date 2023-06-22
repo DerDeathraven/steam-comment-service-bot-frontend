@@ -1,12 +1,18 @@
 <template>
   <div class="wrapper">
     <Navbar></Navbar>
-    <RouterView></RouterView>
+    <div class="flex w-full h-full">
+      <Sidebar></Sidebar>
+      <div class="w-full">
+        <RouterView></RouterView>
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import BotsOverview from "./components/BotsOverview.vue";
 import Navbar from "./components/Navbar.vue";
+import Sidebar from "./components/general/Sidebar.vue";
 </script>
 
 <style scoped>

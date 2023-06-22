@@ -1,6 +1,5 @@
 <template>
   <div class="tile-wrapper">
-    <BotsOverview></BotsOverview>
     <CommentField></CommentField>
   </div>
 </template>

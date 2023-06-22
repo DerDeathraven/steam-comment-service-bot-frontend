@@ -52,3 +52,21 @@ export async function* addBot(name: string, password: string) {
   const json2 = await resp2.json();
   yield json2;
 }
+
+export async function getCommentFile() {
+  const resp = await fetch("/api/commentFile");
+  const json = await resp.json();
+  return json.file as string;
+}
+
+export async function saveCommentFile(file: string) {
+  const resp = await fetch("/api/commentFile", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ file }),
+  });
+  if (resp.status === 200) {
+    return true;
+  }
+  return false;
+}
