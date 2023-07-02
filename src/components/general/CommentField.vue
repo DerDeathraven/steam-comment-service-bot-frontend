@@ -24,7 +24,7 @@
 import { ref } from "vue";
 import Tile from "../Tile.vue";
 import SteamAccountInput from "../inputs/SteamAccountInput.vue";
-import { callCommentFunction } from "../../services/Controller";
+import { Comments } from "../../services/RpcHandler";
 const steamAccount = ref("");
 const amount = ref(0);
 function sendComments() {
@@ -34,7 +34,7 @@ function sendComments() {
   if (amount.value <= 0) {
     return;
   }
-  callCommentFunction(steamAccount.value, amount.value);
+  Comments.comment(amount.value.toString(), steamAccount.value);
 }
 </script>
 

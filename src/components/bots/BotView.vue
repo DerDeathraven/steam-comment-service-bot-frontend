@@ -30,7 +30,7 @@
         <button class="buttonClusterItem" v-if="bot.index">
           <ph-star :size="20" />
         </button>
-        <button class="buttonClusterItem">
+        <button class="buttonClusterItem" @click="removeBot()">
           <ph-trash-simple :size="20" />
         </button>
       </div>
@@ -46,10 +46,14 @@ import {
   PhStar,
   PhCrownSimple,
 } from "@phosphor-icons/vue";
+import { useBotStore } from "../../Stores/BotsStorage";
 type Props = {
   bot: Bot;
 };
-defineProps<Props>();
+const props = defineProps<Props>();
+function removeBot() {
+  useBotStore().removeBot(props.bot);
+}
 </script>
 
 <style scoped lang="scss">

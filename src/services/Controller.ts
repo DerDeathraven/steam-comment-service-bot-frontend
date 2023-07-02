@@ -1,3 +1,5 @@
+import { Bots } from "./RpcHandler";
+
 enum PluginState {
   NOT_LOADED,
   LOADING,
@@ -10,63 +12,16 @@ export async function getState(): Promise<PluginState> {
   return json.state;
 }
 
-export async function getBots(): Promise<Array<Bot>> {
-  const resp = await fetch("/api/bots");
-  const json = await resp.json();
-  return json.bots;
-}
-
-export async function callCommentFunction(
-  steamAccount: string,
-  amount: number
-) {
-  const resp = await fetch("/api/comments", {
-    method: "POST",
-    body: JSON.stringify({
-      steamAccount,
-      amount,
-    }),
-  });
-}
-
 export async function* addBot(name: string, password: string) {
-  const resp = await fetch("/api/bots", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name,
-      password,
-    }),
-  });
-  const json = await resp.json();
-  const code: string = yield json;
-  const resp2 = await fetch("/api/steamGuardCode", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-
-    body: JSON.stringify({
-      code,
-      botIndex: json.bot,
-    }),
-  });
+  const resp = await Bots.addBot(name, password);
+  const code: string = yield resp;
+  const resp2 = await Bots.submitSteamGuardCode(resp, code);
   const json2 = await resp2.json();
   yield json2;
 }
 
-export async function getCommentFile() {
-  const resp = await fetch("/api/commentFile");
+export async function getLatestChangelog() {
+  const resp = await fetch("/frontend/getLatestChangelog");
   const json = await resp.json();
-  return json.file as string;
-}
-
-export async function saveCommentFile(file: string) {
-  const resp = await fetch("/api/commentFile", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ file }),
-  });
-  if (resp.status === 200) {
-    return true;
-  }
-  return false;
+  return json.file;
 }

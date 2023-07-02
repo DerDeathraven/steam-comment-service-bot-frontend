@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { getBots } from "../services/Controller";
+import { Bots } from "../services/RpcHandler";
 
 type BotStoreState = {
   bots: Array<any>;
@@ -21,7 +21,11 @@ export const useBotStore = defineStore("BotStore", {
   },
   actions: {
     async updateBots() {
-      this.bots = await getBots();
+      this.bots = await Bots.getBots();
+    },
+    async removeBot(bot: Bot) {
+      await Bots.removeBot(bot.loginData.logOnOptions.accountName);
+      await this.updateBots();
     },
   },
 });

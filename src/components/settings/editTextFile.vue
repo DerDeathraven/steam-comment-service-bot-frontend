@@ -11,15 +11,15 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from "vue";
-import { getCommentFile, saveCommentFile } from "../../services/Controller";
 import Tile from "../Tile.vue";
+import { Settings } from "../../services/RpcHandler";
 
 const textField = ref("");
 onBeforeMount(async () => {
-  textField.value = await getCommentFile();
+  textField.value = await Settings.getQuoteFile();
 });
 function saveQuotes() {
-  saveCommentFile(textField.value);
+  Settings.setQuoteFile(textField.value);
 }
 </script>
 
