@@ -5,7 +5,9 @@
       class="absolute inset-0 hidden justify-center items-center group-hover:flex"
     >
       <div>
-        <button class="button">Read Full Changelog</button>
+        <RouterLink to="docs/latest"
+          ><button class="button">Read Full Changelog</button></RouterLink
+        >
       </div>
     </div>
   </div>
@@ -15,9 +17,10 @@
 import { onMounted, ref } from "vue";
 import Markdown from "vue3-markdown-it";
 import { getLatestChangelog } from "../../services/Controller";
+import { Docs } from "../../services/RpcHandler";
 const source = ref("");
 onMounted(async () => {
-  source.value = await getLatestChangelog();
+  source.value = await Docs.getLatestChangelog();
 });
 </script>
 

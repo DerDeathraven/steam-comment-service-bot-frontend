@@ -19,7 +19,7 @@ import Sidebar from "./components/general/Sidebar.vue";
 .wrapper {
   height: 100lvh;
   max-width: 100vw;
-  @apply flex flex-col;
+  @apply flex flex-col overflow-hidden;
   background-color: var(--background);
 }
 </style>

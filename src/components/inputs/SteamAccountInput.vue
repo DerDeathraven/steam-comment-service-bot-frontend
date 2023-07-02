@@ -6,7 +6,7 @@
       </div>
       <div>
         <div class="steam-account-name">{{ steamAccount.steamID }}</div>
-        <div class="steam-account-memberTime">
+        <div class="steam-ccount-memberTime">
           {{ steamAccount.memberSince }}
         </div>
       </div>
@@ -26,13 +26,14 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { searchSteamUser } from "../../services/SteamUser";
+import { Frontend } from "../../services/RpcHandler";
 const input = ref("76561198066931868");
 const steamAccount: Ref<undefined | any> = ref(undefined);
 const accountString = defineModel<string>();
 //76561198066931868
 
 async function findAccount() {
-  const account = await searchSteamUser(input.value);
+  const account = await Frontend.getSteamProfile(input.value);
   if (account) {
     steamAccount.value = account;
     console.log(account);

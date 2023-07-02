@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { PhGlobeSimple, PhRobot, PhGear } from "@phosphor-icons/vue";
+import { PhGlobeSimple, PhRobot, PhGear, PhBooks } from "@phosphor-icons/vue";
 
 const links = [
   {
@@ -20,6 +20,11 @@ const links = [
     name: "Bots",
     to: "/bots",
     icon: PhRobot,
+  },
+  {
+    name: "Docs",
+    to: "/docs",
+    icon: PhBooks,
   },
   {
     name: "Settings",
@@ -34,9 +39,12 @@ const links = [
   width: 10vw;
   height: 100%;
   background-color: var(--tile);
-  @apply flex flex-col px-2 py-4 gap-4;
+  @apply flex flex-col pl-2 py-4 gap-4;
 }
 .link {
-  @apply flex gap-2 items-center;
+  @apply flex gap-2 items-center px-3 py-2 rounded-l;
+}
+.router-link-active {
+  background-color: var(--background);
 }
 </style>

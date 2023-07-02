@@ -1,4 +1,3 @@
-import { getBotsResponse } from "./types/returnTypes";
 class AbstractRPC {
   static ClassName = "";
   static async _generateMethodCall(
@@ -17,7 +16,10 @@ class AbstractRPC {
     const json = await res.json();
     return json.result;
   }
-  static async _generatePOSTMethodCall(methodname, params) {
+  static async _generatePOSTMethodCall(
+    methodname: string,
+    params: Record<string, any>
+  ) {
     const res = await fetch("/rpc/" + this.ClassName + "." + methodname, {
       method: "POST",
       headers: {
@@ -32,7 +34,7 @@ class AbstractRPC {
 
 export class Bots extends AbstractRPC {
   static ClassName = "Bots";
-  public static async getBots(): Promise<getBotsResponse> {
+  public static async getBots(): Promise<any> {
     return await this._generateMethodCall("getBots", {});
   }
   public static async botCount(): Promise<number> {
@@ -78,5 +80,25 @@ export class Comments extends AbstractRPC {
   }
   public static async commentCount() {
     return await this._generateMethodCall("commentCount", {});
+  }
+}
+
+export class Docs extends AbstractRPC {
+  static ClassName = "Docs";
+  public static async getDocFolders() {
+    return await this._generateMethodCall("getDocFolders", {});
+  }
+  public static async getDocFile(file: string) {
+    return await this._generateMethodCall("getDocFile", { file });
+  }
+  public static async getLatestChangelog() {
+    return await this._generateMethodCall("getLatestChangelog", {});
+  }
+}
+
+export class Frontend extends AbstractRPC {
+  static ClassName = "Frontend";
+  public static async getSteamProfile(steamID: string) {
+    return await this._generateMethodCall("getSteamProfile", { steamID });
   }
 }
