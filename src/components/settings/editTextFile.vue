@@ -2,8 +2,8 @@
   <Tile class="gap-4 flex flex-col">
     <h2>Quotes</h2>
 
-    <textarea v-model="textField" rows="15" class="textArea"></textarea>
-    <div>
+    <textarea v-model="textField" rows="15" class="textArea grow"></textarea>
+    <div class="flex justify-end items-end grow px-2">
       <button class="button" @click="saveQuotes()">Save</button>
     </div>
   </Tile>

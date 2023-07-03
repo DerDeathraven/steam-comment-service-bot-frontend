@@ -2,7 +2,6 @@ import Home from "../views/Home.vue";
 import Bots from "../views/Bots.vue";
 import Settings from "../views/Settings.vue";
 import DocOverview from "../views/Docs/Overview.vue";
-import DocSub from "../views/Docs/Subview.vue";
 import Loading from "../views/Loading.vue";
 import { createRouter, createWebHistory } from "vue-router";
 

@@ -10,7 +10,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import BotsOverview from "./components/BotsOverview.vue";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/general/Sidebar.vue";
 </script>

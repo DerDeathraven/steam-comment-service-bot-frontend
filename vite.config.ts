@@ -18,7 +18,6 @@ export default defineConfig({
       },
       "/rpc": {
         target: "http://localhost:4000",
-        changeOrigin: true,
       },
       "/frontend": {
         target: "http://localhost:4000",
