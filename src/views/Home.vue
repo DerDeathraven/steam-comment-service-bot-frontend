@@ -1,7 +1,7 @@
 <template>
   <div class="tile-wrapper">
     <ProgramData></ProgramData>
-    <CommentField></CommentField>
+    <CommandArea></CommandArea>
     <ConsoleRow></ConsoleRow>
   </div>
 </template>
@@ -15,6 +15,7 @@ import { useBotStore } from "../Stores/BotsStorage";
 import CommentField from "../components/general/CommentField.vue";
 import { Bots } from "../services/RpcHandler";
 import ConsoleRow from "../components/overview/ConsoleRow.vue";
+import CommandArea from "../components/general/CommandArea.vue";
 const router = useRouter();
 
 onMounted(async () => {

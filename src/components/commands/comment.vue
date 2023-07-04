@@ -1,23 +1,21 @@
 <template>
-  <Tile>
-    <div>
-      <h2 class="mb-4">Comment</h2>
-      <div class="comment-form">
-        <SteamAccountInput v-model="steamAccount"></SteamAccountInput>
-        <div class="amount-wrapper">
-          <input
-            type="number"
-            name="amount"
-            placeholder="Amount"
-            v-model="amount"
-          />
-        </div>
-        <div class="button-wrapper">
-          <button @click="sendComments()">Send</button>
-        </div>
+  <div>
+    <h2 class="mb-4">Comment</h2>
+    <div class="comment-form">
+      <SteamAccountInput v-model="steamAccount"></SteamAccountInput>
+      <div class="amount-wrapper">
+        <input
+          type="number"
+          name="amount"
+          placeholder="Amount"
+          v-model="amount"
+        />
+      </div>
+      <div class="button-wrapper">
+        <button @click="sendComments()">Send</button>
       </div>
     </div>
-  </Tile>
+  </div>
 </template>
 
 <script setup lang="ts">
